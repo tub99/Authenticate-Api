@@ -34,6 +34,10 @@ var registerRouterModule = require('./src/routes/register.ctrl.js'),
 // /account/register
 rootRouter.use('/register', registerRouter);
 
+
+
+
+
 /**
  *  /account/login
  */
