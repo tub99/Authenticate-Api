@@ -19,15 +19,20 @@ function DbManager(dbname) {
         });
     };
     // Fetch records from Db
-    this.fetchDoc = function (tableName) {
+    this.fetchDoc = function (tableName, paramsObj) {
         var resolve, reject,
             fetchPromise = new Promise(function (res, rej) {
                 resolve = res;
                 reject = rej;
             })
-        var records = [];
-        // cursor will be fetching the entire data
-        var cursor = dbase.collection(tableName).find();
+        var records = [],
+            // cursor will be fetching the entire data
+            cursor;
+        if (paramsObj) {
+            cursor = dbase.collection(tableName).find(paramsObj);
+        } else {
+            cursor = dbase.collection(tableName).find();
+        }
         // Interating through every row of the table
         cursor.each(function (err, doc) {
             console.log('retrieving docs', doc);
