@@ -1,5 +1,5 @@
-var DbManager = require("d:/xampp/htdocs/myProjects/Authenticate-Api/db/mongooseDbManager.js"),
-    userModel = require("d:/xampp/htdocs/myProjects/Authenticate-Api/models/user.js")
+var DbManager = require(global.relSrcPath+"/db/mongooseDbManager.js"),
+    userModel = require(global.relSrcPath+"/models/user.js")
     dbMngr = new DbManager('register'),
     tableName = 'Registration_tbl';
 

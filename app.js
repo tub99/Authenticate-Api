@@ -6,6 +6,8 @@ var express = require('express'),
   fs = require('fs'),
   nconf = require('nconf');
 
+  global.relSrcPath = __dirname;
+
 //Setting up configuration ovbject of our project through nconf
 // optional config for developer convenience
 var localConfigFile = __dirname + '/config/config-local.json';
