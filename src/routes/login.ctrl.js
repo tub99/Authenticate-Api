@@ -1,5 +1,5 @@
-var DbManager = require(global.relSrcPath+"/db/mongooseDbManager.js"),
-    userModel = require(global.relSrcPath+"/models/user.js")
+var DbManager = require(global.relSrcPath + "/db/mongooseDbManager.js"),
+    userModel = require(global.relSrcPath + "/models/user.js")
 dbMngr = new DbManager('register'),
     tableName = 'Registration_tbl';
 
@@ -26,7 +26,7 @@ function validateUser(req, res, next) {
 }
 
 module.exports = function (router) {
-    // /acoount/register
+    // /acoount/login
     router.post('/', validateUser);
     return router;
 }

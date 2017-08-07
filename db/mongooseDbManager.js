@@ -31,13 +31,11 @@ function MongooseDbManager(dbname) {
                 resolve = res;
                 reject = rej;
             });
-        var model;
-        // if (paramsObj) {
-        //     model = new Model(paramsObj);
-        // } else {
-        //     model = new Model();
-        // }
-        Model.find({}, function (err, docs) {
+        var model = paramsObj;
+        if(!model){
+            model = {};
+        }
+        Model.find(model, function (err, docs) {
             if (err) {
                 reject(false);
             }
@@ -59,16 +57,50 @@ function MongooseDbManager(dbname) {
             resolve(true);
         });
         return insertPromise;
-
+       // return Promise.resolve(true)
     };
-    this.updateDoc = function (tableName, fieldToUpdate, oldValue, updatedValue) {
-
+    this.updateDoc = function (Model, paramsObj) {
+                 var resolve, reject,
+            searchPromise = new Promise(function (res, rej) {
+                resolve = res;
+                reject = rej;
+            });
+        var model;
+        //Query : Model.findOne({ 'name.last': 'Ghost' }, 'name occupation',
+        Model.findOne(paramsObj, function (err, user) {
+            if (err) {
+                reject(false);
+            }
+            console.log('this fires after the post find hook', docs);
+            resolve(user);
+        });
+        return searchPromise;
 
     };
     this.deleteDoc = function (tableName, fieldToDelete, valueToDelete) {
         dbase.collection(tableName).updateOne({
             fieldToDelete: valueToDelete
         });
+    };
+    this.searchDoc = function(Model, paramsObj) {
+         var resolve, reject,
+            searchPromise = new Promise(function (res, rej) {
+                resolve = res;
+                reject = rej;
+            });
+        var model;
+        //Query : Model.findOne({ 'name.last': 'Ghost' }, 'name occupation',
+        Model.findOne(paramsObj, function (err, user) {
+            if (err) {
+                reject(false);
+            }
+            console.log('this fires after the post find hook', user);
+            if(user)
+                resolve(user);
+            else
+                reject(false);     
+        });
+        return searchPromise;
     };
 
 }

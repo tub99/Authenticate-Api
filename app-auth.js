@@ -43,7 +43,14 @@ rootRouter.use('/register', registerRouter);
 /**
  *  /account/login
  */
-
+/**
+ *  /account/login
+ */
+var loginRouterModule = require('./src/routes/login.ctrl.js'),
+  loginRouter = loginRouterModule(express.Router());
+// Registering parent router with the child router
+// /account/register
+rootRouter.use('/login', loginRouter);
 /**
  *  /account/logout
  */
